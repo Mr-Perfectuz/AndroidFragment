@@ -1,4 +1,71 @@
 package com.example.android.android_me.ui;
 
-class MasterListAdapter {
+
+import android.content.Context;
+import android.media.Image;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+
+import java.util.List;
+import java.util.Map;
+
+// Custom adapter class that displays a list of Android-Me images in a GridView
+public class MasterListAdapter extends BaseAdapter  {
+    //keeps track of the contextand listof images to display
+    private Context mContext;
+    private List<Integer> mImageIds;
+
+
+    /**
+     * Constructor method
+     * * @param imageIds The list of images to display
+     *
+     */
+    public MasterListAdapter(Context context, List<Integer> imageIds) {
+        mContext = context;
+        mImageIds = imageIds;
+    }
+
+    /**
+     * Returns the number of items the adapter will display
+     */
+    @Override
+    public int getCount() {
+        return mImageIds.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
+
+
+    /**
+     * Creates a new ImageView for each item referenced by the adapter
+     */
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        ImageView imageView;
+        if (convertView == null) {
+            //if the Viewis not recycled, this created a new ImageView to hold an image
+            imageView = new ImageView(mContext);
+            //Define the layout parameters
+            imageView.setAdjustViewBounds(true);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(8, 8, 8, 8);
+        }else {
+            imageView = (ImageView) convertView;
+        }
+        // set the image recourse and the newly created ImageView
+        imageView.setImageResource(mImageIds.get(position));
+        return imageView;
+    }
+
+
 }
