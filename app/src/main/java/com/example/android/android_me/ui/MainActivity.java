@@ -2,7 +2,7 @@ package com.example.android.android_me.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.android.android_me.R;
 import com.example.android.android_me.data.AndroidImageAssets;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 
 // This activity is responsible for displaying the master list of all images
@@ -27,11 +28,16 @@ public class MainActivity extends AppCompatActivity implements MasterListFragmen
     // a single pane display refers to home screen
     private boolean mTwoPane;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // determine if you're creating a two-pane or single-pane display
         if (findViewById(R.id.android_me_linear_layout) != null) {
